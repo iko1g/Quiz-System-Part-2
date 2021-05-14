@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.core.generated="false" org.eventb.texttools.text_lastmodified="1590751596701" org.eventb.texttools.text_representation="machine m2&#10;refines m1&#10;sees c1 c2&#10;&#10;variables&#10;&#9;creators&#10;&#9;options_of_question&#10;&#9;questions_of_quiz&#10;&#9;answer_of_question&#10;&#10;invariants&#10;&#9;@inv1: creators ⊆  registerd_users&#10;&#9;@inv2: questions_of_quiz ⊆  QUESTIONS&#10;&#9;@inv3: answer_of_question ⊆  ANSWERS&#10;&#9;@inv4: options_of_question ⊆ OPTIONS&#10;&#9;@inv5: access ⊆  USERS ⋃  QUIZZES&#10;&#10;events&#10;    event INITIALISATION&#10;    end&#10;&#10;&#9;event CreateQuiz&#10;&#9;&#9;any u q where&#10;&#9;&#9;@grd1: u ∈ currently_logged_in&#10;&#9;&#9;@grd2: q ∉  QUIZZES&#10;&#9;&#9;then&#10;&#9;&#9;@act1: creators ≔ creators ⋃ (u,q)&#10;&#9;&#9;@act2: quizzes ≔ quizzes ⋃ {q}&#10;&#9;&#9;@act3: access ≔ access ⋃ (u,q)&#10;&#9;end&#10;&#10;&#9;event AddQuestion&#10;&#9;&#9;any u quiz q a o where&#10;&#9;&#9;@grd1: u ∈ currently_logged_in&#10;&#9;&#9;@grd2: quiz ∈ quizzes&#10;&#9;&#9;@grd3: quiz = creators(u)&#10;&#9;&#9;@grd4: q ≠ questions_of_quiz(quiz)&#10;&#9;&#9;@grd5: a ≠ answer_of_question(q)&#10;&#9;&#9;@grd6: o ≠ options_of_question(q)&#10;&#9;&#9;then&#10;&#9;&#9;@act1: questions_of_quiz ≔ questions_of_quiz  U (quiz,q)&#10;&#9;&#9;@act2: answer_of_question ≔ answer_of_question  U (q,a)&#10;&#9;&#9;@act3: options_of_question ≔ options_of_question U (q,o)&#10;&#9;end&#10;&#10;&#9;event ChangeQuestion&#10;&#9;&#9;any u quiz q1 q2 a1 a2 o1 o2 where&#10;&#9;&#9;@grd1: u ∈ currently_logged_in&#10;&#9;&#9;@grd2: quiz ∈ quizzes&#10;&#9;&#9;@grd3: quiz = creators(u)&#10;&#9;&#9;@grd4: q1 = questions_of_quiz(quiz)&#10;&#9;&#9;@grd5: a1 = answer_of_question(q1)&#10;&#9;&#9;@grd6: o1 = options_of_question(q1)&#10;&#9;&#9;then&#10;&#9;&#9;@act1: answer_of_question ≔ answer_of_question  ∖ (q1, a1)&#10;&#9;&#9;@act2: questions_of_quiz ≔ questions_of_quiz ∖ (quiz, q1)&#10;&#9;&#9;@act3: options_of_question ≔ options_of_question ∖ (q1, o1)&#10;&#9;&#9;@act4: answer_of_question ≔ answer_of_question  ⋃ (q2, a2)&#10;&#9;&#9;@act5: questions_of_quiz ≔ questions_of_quiz ⋃ (quiz, q2)&#10;&#9;&#9;@act6: options_of_question ≔ options_of_question ∖ (q2, o2)&#10;&#9;end&#10;&#10;&#9;event RemoveQuestion&#10;&#9;&#9;any u quiz q where&#10;&#9;&#9;@grd1: u ∈ currently_logged_in&#10;&#9;&#9;@grd2: quiz ∈ quizzes&#10;&#9;&#9;@grd3: quiz = creators(u)&#10;&#9;&#9;@grd4: q = questions_of_quiz(quiz)&#10;&#9;&#9;then&#10;&#9;&#9;@act1: answer_of_question ≔ answer_of_question  ∖ (q,answer_of_question(q))&#10;&#9;&#9;@act2: options_of_question ≔ options_of_question ∖ (q,o)&#10;&#9;&#9;@act3: questions_of_quiz ≔ questions_of_quiz ∖ (quiz,q)&#10;&#9;end&#10;&#10;&#9;event RemoveQuiz&#10;&#9;any u q where&#10;&#9;&#9;@grd1: u ∈ currently_logged_in&#10;&#9;&#9;@grd2: q ∈ quizzes&#10;&#9;&#9;@grd3: q = creators(u)&#10;&#9;&#9;then&#10;&#9;&#9;@act1:  answer_of_question ≔ answer_of_question  ∖ (questions_of_quiz(q),answer_of_question(questions_of_quiz(q)))&#10;&#9;&#9;@act2: questions_of_quiz ≔ questions_of_quiz ∖ (q,questions_of_quiz(q))&#10;&#9;&#9;@act3: options_of_question ≔ options_of_question ∖ (questions_of_quiz(q),options_of_question(questions_of_quiz(q)))&#10;&#9;&#9;@act4: quizzes ≔ quizzes ∖ {q}&#10;&#9;&#9;@act5: access ≔ access ⩥ q&#10;&#9;end&#10;end&#10;" version="5">
+<org.eventb.core.refinesMachine name="_qUHysKDzEeq3N5znfJVaUg" org.eventb.core.target="m1"/>
+<org.eventb.core.seesContext name="_qUHysaDzEeq3N5znfJVaUg" org.eventb.core.target="c1"/>
+<org.eventb.core.seesContext name="_B2nzsKD0Eeq3N5znfJVaUg" org.eventb.core.target="c2"/>
+<org.eventb.core.event name="'" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="INITIALISATION"/>
+<org.eventb.core.variable name="_s8OdYKDzEeq3N5znfJVaUg" org.eventb.core.generated="false" org.eventb.core.identifier="creators"/>
+<org.eventb.core.variable name="_w2G5AKDzEeq3N5znfJVaUg" org.eventb.core.generated="false" org.eventb.core.identifier="options_of_question"/>
+<org.eventb.core.variable name="_x-Z90KDzEeq3N5znfJVaUg" org.eventb.core.generated="false" org.eventb.core.identifier="questions_of_quiz"/>
+<org.eventb.core.variable name="_x-Z90aDzEeq3N5znfJVaUg" org.eventb.core.generated="false" org.eventb.core.identifier="answer_of_question"/>
+<org.eventb.core.invariant name="_2gKRwKDzEeq3N5znfJVaUg" org.eventb.core.generated="false" org.eventb.core.label="inv1;" org.eventb.core.predicate="creators ⊆  registerd_users"/>
+<org.eventb.core.invariant name="_IXjRoKEWEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="inv2;" org.eventb.core.predicate="questions_of_quiz ⊆  QUESTIONS"/>
+<org.eventb.core.invariant name="_IXjRoaEWEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="inv3;" org.eventb.core.predicate="answer_of_question ⊆  ANSWERS"/>
+<org.eventb.core.invariant name="_Pvz4oKEWEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="inv4;" org.eventb.core.predicate="options_of_question ⊆ OPTIONS"/>
+<org.eventb.core.event name="_D5c1kKGNEeqA39__nXnTZQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="CreateQuiz">
+<org.eventb.core.parameter name="_D5c1kaGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="u"/>
+<org.eventb.core.parameter name="_D5c1kqGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="q"/>
+<org.eventb.core.guard name="_D5dcoKGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd1;" org.eventb.core.predicate="u ∈ currently_logged_in"/>
+<org.eventb.core.guard name="_D5dcoaGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd2;" org.eventb.core.predicate="q ∉  QUIZZES"/>
+<org.eventb.core.action name="_D5dcoqGNEeqA39__nXnTZQ" org.eventb.core.assignment="creators ≔ creators ⋃ (u,q)" org.eventb.core.generated="false" org.eventb.core.label="act1;"/>
+<org.eventb.core.action name="_D5eDsKGNEeqA39__nXnTZQ" org.eventb.core.assignment="quizzes ≔ quizzes ⋃ {q}" org.eventb.core.generated="false" org.eventb.core.label="act2;"/>
+<org.eventb.core.action name="_D5eDsaGNEeqA39__nXnTZQ" org.eventb.core.assignment="access ≔ access ⋃ (u,q)" org.eventb.core.generated="false" org.eventb.core.label="act3;"/>
+</org.eventb.core.event>
+<org.eventb.core.invariant name="_i1BV4KGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="inv5;" org.eventb.core.predicate="access ⊆  USERS ⋃  QUIZZES"/>
+<org.eventb.core.event name="_oWYFoKGNEeqA39__nXnTZQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="AddQuestion">
+<org.eventb.core.parameter name="_1ufWQKGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="u"/>
+<org.eventb.core.parameter name="_1ufWQaGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="quiz"/>
+<org.eventb.core.parameter name="_1ufWQqGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="q"/>
+<org.eventb.core.parameter name="_-2if4KGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="a"/>
+<org.eventb.core.parameter name="_1ufWQ6GNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="o"/>
+<org.eventb.core.guard name="_1ufWRKGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd1;" org.eventb.core.predicate="u ∈ currently_logged_in"/>
+<org.eventb.core.guard name="_1uf9UKGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd2;" org.eventb.core.predicate="quiz ∈ quizzes"/>
+<org.eventb.core.guard name="_1uf9UaGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd3;" org.eventb.core.predicate="quiz = creators(u)"/>
+<org.eventb.core.guard name="_1uf9UqGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd4;" org.eventb.core.predicate="q ≠ questions_of_quiz(quiz)"/>
+<org.eventb.core.guard name="_4yKioKGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd5;" org.eventb.core.predicate="a ≠ answer_of_question(q)"/>
+<org.eventb.core.guard name="_1ugkYaGNEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd6;" org.eventb.core.predicate="o ≠ options_of_question(q)"/>
+<org.eventb.core.action name="_1uhLcKGNEeqA39__nXnTZQ" org.eventb.core.assignment="questions_of_quiz ≔ questions_of_quiz  U (quiz,q)" org.eventb.core.generated="false" org.eventb.core.label="act1;"/>
+<org.eventb.core.action name="_1uhLcaGNEeqA39__nXnTZQ" org.eventb.core.assignment="answer_of_question ≔ answer_of_question  U (q,a)" org.eventb.core.generated="false" org.eventb.core.label="act2;"/>
+<org.eventb.core.action name="_1uhLcqGNEeqA39__nXnTZQ" org.eventb.core.assignment="options_of_question ≔ options_of_question U (q,o)" org.eventb.core.generated="false" org.eventb.core.label="act3;"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_HTgIUKGSEeqA39__nXnTZQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="ChangeQuestion">
+<org.eventb.core.parameter name="_HTgIUaGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="u"/>
+<org.eventb.core.parameter name="_HTgIUqGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="quiz"/>
+<org.eventb.core.parameter name="_HTgIU6GSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="q1"/>
+<org.eventb.core.parameter name="_HTgvYKGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="q2"/>
+<org.eventb.core.parameter name="_HTgvYaGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="a1"/>
+<org.eventb.core.parameter name="_HTgvYqGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="a2"/>
+<org.eventb.core.parameter name="_HTgvY6GSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="o1"/>
+<org.eventb.core.parameter name="_HThWcKGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.identifier="o2"/>
+<org.eventb.core.guard name="_HThWcaGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd1;" org.eventb.core.predicate="u ∈ currently_logged_in"/>
+<org.eventb.core.guard name="_HThWcqGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd2;" org.eventb.core.predicate="quiz ∈ quizzes"/>
+<org.eventb.core.guard name="_HThWc6GSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd3;" org.eventb.core.predicate="quiz = creators(u)"/>
+<org.eventb.core.guard name="_HTh9gKGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd4;" org.eventb.core.predicate="q1 = questions_of_quiz(quiz)"/>
+<org.eventb.core.guard name="_HTh9gaGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd5;" org.eventb.core.predicate="a1 = answer_of_question(q1)"/>
+<org.eventb.core.guard name="_HTh9gqGSEeqA39__nXnTZQ" org.eventb.core.generated="false" org.eventb.core.label="grd6;" org.eventb.core.predicate="o1 = options_of_question(q1)"/>
+<org.eventb.core.action name="_HTikkKGSEeqA39__nXnTZQ" org.eventb.core.assignment="answer_of_question ≔ answer_of_question  ∖ (q1, a1)" org.eventb.core.generated="false" org.eventb.core.label="act1;"/>
+<org.eventb.core.action name="_HTikkaGSEeqA39__nXnTZQ" org.eventb.core.assignment="questions_of_quiz ≔ questions_of_quiz ∖ (quiz, q1)" org.eventb.core.generated="false" org.eventb.core.label="act2;"/>
+<org.eventb.core.action name="_HTikkqGSEeqA39__nXnTZQ" org.eventb.core.assignment="options_of_question ≔ options_of_question ∖ (q1, o1)" org.eventb.core.generated="false" org.eventb.core.label="act3;"/>
+<org.eventb.core.action name="_HTjLoKGSEeqA39__nXnTZQ" org.eventb.core.assignment="answer_of_question ≔ answer_of_question  ⋃ (q2, a2)" org.eventb.core.generated="false" org.eventb.core.label="act4;"/>
+<org.eventb.core.action name="_HTjLoaGSEeqA39__nXnTZQ" org.eventb.core.assignment="questions_of_quiz ≔ questions_of_quiz ⋃ (quiz, q2)" org.eventb.core.generated="false" org.eventb.core.label="act5;"/>
+<org.eventb.core.action name="_HTjLoqGSEeqA39__nXnTZQ" org.eventb.core.assignment="options_of_question ≔ options_of_question ∖ (q2, o2)" org.eventb.core.generated="false" org.eventb.core.label="act6;"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_n32c8KGVEeq37tKtcCLtXw" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="RemoveQuestion">
+<org.eventb.core.parameter name="_n33EAKGVEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="u"/>
+<org.eventb.core.parameter name="_n33EAaGVEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="quiz"/>
+<org.eventb.core.parameter name="_n33rEKGVEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="q"/>
+<org.eventb.core.guard name="_n33rEaGVEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd1;" org.eventb.core.predicate="u ∈ currently_logged_in"/>
+<org.eventb.core.guard name="_n34SIKGVEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd2;" org.eventb.core.predicate="quiz ∈ quizzes"/>
+<org.eventb.core.guard name="_n345MKGVEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd3;" org.eventb.core.predicate="quiz = creators(u)"/>
+<org.eventb.core.guard name="_n35gQKGVEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd4;" org.eventb.core.predicate="q = questions_of_quiz(quiz)"/>
+<org.eventb.core.action name="_n36HUKGVEeq37tKtcCLtXw" org.eventb.core.assignment="answer_of_question ≔ answer_of_question  ∖ (q,answer_of_question(q))" org.eventb.core.generated="false" org.eventb.core.label="act1;"/>
+<org.eventb.core.action name="_n36uYKGVEeq37tKtcCLtXw" org.eventb.core.assignment="options_of_question ≔ options_of_question ∖ (q,o)" org.eventb.core.generated="false" org.eventb.core.label="act2;"/>
+<org.eventb.core.action name="_n36uYaGVEeq37tKtcCLtXw" org.eventb.core.assignment="questions_of_quiz ≔ questions_of_quiz ∖ (quiz,q)" org.eventb.core.generated="false" org.eventb.core.label="act3;"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_RqIoIKGWEeq37tKtcCLtXw" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="RemoveQuiz">
+<org.eventb.core.parameter name="_RqJPMKGWEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="u"/>
+<org.eventb.core.parameter name="_RqJPMaGWEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="q"/>
+<org.eventb.core.guard name="_RqJPMqGWEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd1;" org.eventb.core.predicate="u ∈ currently_logged_in"/>
+<org.eventb.core.guard name="_RqJ2QKGWEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd2;" org.eventb.core.predicate="q ∈ quizzes"/>
+<org.eventb.core.guard name="_RqJ2QaGWEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd3;" org.eventb.core.predicate="q = creators(u)"/>
+<org.eventb.core.action name="_RqJ2QqGWEeq37tKtcCLtXw" org.eventb.core.assignment="answer_of_question ≔ answer_of_question  ∖ (questions_of_quiz(q),answer_of_question(questions_of_quiz(q)))" org.eventb.core.generated="false" org.eventb.core.label="act1;"/>
+<org.eventb.core.action name="_RqKdUKGWEeq37tKtcCLtXw" org.eventb.core.assignment="questions_of_quiz ≔ questions_of_quiz ∖ (q,questions_of_quiz(q))" org.eventb.core.generated="false" org.eventb.core.label="act2;"/>
+<org.eventb.core.action name="_RqKdUaGWEeq37tKtcCLtXw" org.eventb.core.assignment="options_of_question ≔ options_of_question ∖ (questions_of_quiz(q),options_of_question(questions_of_quiz(q)))" org.eventb.core.generated="false" org.eventb.core.label="act3;"/>
+<org.eventb.core.action name="_RqKdUqGWEeq37tKtcCLtXw" org.eventb.core.assignment="quizzes ≔ quizzes ∖ {q}" org.eventb.core.generated="false" org.eventb.core.label="act4;"/>
+<org.eventb.core.action name="_RqLEYKGWEeq37tKtcCLtXw" org.eventb.core.assignment="access ≔ access ⩥ q" org.eventb.core.generated="false" org.eventb.core.label="act5;"/>
+</org.eventb.core.event>
+</org.eventb.core.machineFile>

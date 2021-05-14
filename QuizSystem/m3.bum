@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.configuration="org.eventb.core.fwd" org.eventb.core.generated="false" org.eventb.texttools.text_lastmodified="1590754445578" org.eventb.texttools.text_representation="machine m3&#10;refines m2&#10;sees c1 c2&#10;&#10;variables&#10;&#9;access&#10;&#9;live_quizzes&#10;&#9;host&#10;&#9;participants&#10;&#10;invariants&#10;&#9;@inv1: access ⊆ registerd_users  QUIZZES&#10;&#9;@inv2: creator(q) ∈ access(q)&#10;&#9;@inv3: live_quizzes ⊆ QUIZZES&#10;&#9;@inv4: host ⊆ currently_logged_in ⤖  QUIZZES&#10;&#9;@inv5: participants ⊆ live_quizzes ↣ USERS&#10;&#10;events&#10;  &#9;event INITIALISATION&#10;  &#9;end&#10;&#10;  &#9;event ShareQuiz&#10;  &#9;&#9;any u1 u2 q where&#10;&#9;&#9;@grd1: q ∈ creator(u1)&#10;&#9;&#9;@grd2: u1 ∈ currently_logged_in&#10;&#9;&#9;@grd3: u2 ∈ reg_user&#10;&#9;&#9;@grd4: u2 ≠ access(q)&#10;&#9;&#9;then&#10;&#9;&#9;@act1: access ≔ access ⋃ (u2,q)&#10;&#9;end&#10;&#10;&#9;event HostQuiz&#10;&#9;&#9;any u q where&#10;&#9;&#9;@grd1: u ∈ currently_logged_in&#10;&#9;&#9;@grd2: q ∈ quizzes&#10;&#9;&#9;@grd3: q ∈ access(u)&#10;&#9;&#9;then&#10;&#9;&#9;@act1: live_quizzes ≔ live_quizzes ⋃ {q}&#10;&#9;&#9;@act2: host ≔ host ⋃ (u,q)&#10;&#9;end&#10;&#10;&#9;event RegJoin&#10;&#9;&#9;any u q where&#10;&#9;&#9;@grd1:  u ∈ currently_logged_in&#10;&#9;&#9;@grd2: q ∈ quizzes&#10;&#9;&#9;@grd3: u ≠ participants(q)&#10;&#9;&#9;then&#10;&#9;&#9;@act1: participants ≔ participants ∪ (q,u)&#10;&#9;end&#10;&#10;&#9;event UnRegJoin&#10;&#9;&#9;any u q where&#10;&#9;&#9;@grd1: u ∈ users&#10;&#9;&#9;@grd2: q ∈ quizzes&#10;&#9;&#9;@grd3: u ∉ reg_users&#10;&#9;&#9;then&#10;&#9;&#9;@act1: participants ≔ participants ⋃ (q,u)&#10;&#9;end&#10;end" version="5">
+<org.eventb.core.refinesMachine name="_XCbtEKGXEeq37tKtcCLtXw" org.eventb.core.target="m2"/>
+<org.eventb.core.seesContext name="_XCbtEaGXEeq37tKtcCLtXw" org.eventb.core.target="c1"/>
+<org.eventb.core.seesContext name="_XCbtEqGXEeq37tKtcCLtXw" org.eventb.core.target="c2"/>
+<org.eventb.core.event name="'" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="INITIALISATION"/>
+<org.eventb.core.variable name="_l-omoKGXEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="access"/>
+<org.eventb.core.variable name="_oXq6kKGXEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="live_quizzes"/>
+<org.eventb.core.variable name="_oXq6kaGXEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="host"/>
+<org.eventb.core.variable name="_oXrhoKGXEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="participants"/>
+<org.eventb.core.invariant name="_0pDMoKGXEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="inv1;" org.eventb.core.predicate="access ⊆ registerd_users  QUIZZES"/>
+<org.eventb.core.invariant name="_8F-UYKGbEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="inv2;" org.eventb.core.predicate="creator(q) ∈ access(q)"/>
+<org.eventb.core.invariant name="_CQ0GAKGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="inv3;" org.eventb.core.predicate="live_quizzes ⊆ QUIZZES"/>
+<org.eventb.core.invariant name="_CQ0tEKGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="inv4;" org.eventb.core.predicate="host ⊆ currently_logged_in ⤖  QUIZZES"/>
+<org.eventb.core.invariant name="_CQ0tEaGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="inv5;" org.eventb.core.predicate="participants ⊆ live_quizzes ↣ USERS"/>
+<org.eventb.core.event name="_49tGcKGcEeq37tKtcCLtXw" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="ShareQuiz">
+<org.eventb.core.parameter name="_49tGcaGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="u1"/>
+<org.eventb.core.parameter name="_49tGcqGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="u2"/>
+<org.eventb.core.parameter name="_49ttgKGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="q"/>
+<org.eventb.core.guard name="_49ttgaGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd1;" org.eventb.core.predicate="q ∈ creator(u1)"/>
+<org.eventb.core.guard name="_49uUkKGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd2;" org.eventb.core.predicate="u1 ∈ currently_logged_in"/>
+<org.eventb.core.guard name="_49uUkaGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd3;" org.eventb.core.predicate="u2 ∈ reg_user"/>
+<org.eventb.core.guard name="_49uUkqGcEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd4;" org.eventb.core.predicate="u2 ≠ access(q)"/>
+<org.eventb.core.action name="_49u7oKGcEeq37tKtcCLtXw" org.eventb.core.assignment="access ≔ access ⋃ (u2,q)" org.eventb.core.generated="false" org.eventb.core.label="act1;"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_C8NW8KGdEeq37tKtcCLtXw" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="HostQuiz">
+<org.eventb.core.parameter name="_C8N-AKGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="u"/>
+<org.eventb.core.parameter name="_C8N-AaGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="q"/>
+<org.eventb.core.guard name="_C8N-AqGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd1;" org.eventb.core.predicate="u ∈ currently_logged_in"/>
+<org.eventb.core.guard name="_C8N-A6GdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd2;" org.eventb.core.predicate="q ∈ quizzes"/>
+<org.eventb.core.guard name="_C8OlEKGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd3;" org.eventb.core.predicate="q ∈ access(u)"/>
+<org.eventb.core.action name="_C8OlEaGdEeq37tKtcCLtXw" org.eventb.core.assignment="live_quizzes ≔ live_quizzes ⋃ {q}" org.eventb.core.generated="false" org.eventb.core.label="act1;"/>
+<org.eventb.core.action name="_C8OlEqGdEeq37tKtcCLtXw" org.eventb.core.assignment="host ≔ host ⋃ (u,q)" org.eventb.core.generated="false" org.eventb.core.label="act2;"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_K8dLAKGdEeq37tKtcCLtXw" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="RegJoin">
+<org.eventb.core.parameter name="_K8dLAaGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="u"/>
+<org.eventb.core.parameter name="_K8dLAqGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="q"/>
+<org.eventb.core.guard name="_aTg0kKGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd1;" org.eventb.core.predicate="u ∈ currently_logged_in"/>
+<org.eventb.core.guard name="_K8dyEKGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd2;" org.eventb.core.predicate="q ∈ quizzes"/>
+<org.eventb.core.guard name="_K8dyEaGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd3;" org.eventb.core.predicate="u ≠ participants(q)"/>
+<org.eventb.core.action name="_K8dyEqGdEeq37tKtcCLtXw" org.eventb.core.assignment="participants ≔ participants ∪ (q,u)" org.eventb.core.generated="false" org.eventb.core.label="act1;"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_aThboKGdEeq37tKtcCLtXw" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.generated="false" org.eventb.core.label="UnRegJoin">
+<org.eventb.core.parameter name="_aThboaGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="u"/>
+<org.eventb.core.parameter name="_aTiCsKGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.identifier="q"/>
+<org.eventb.core.guard name="_aTiCsaGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd1;" org.eventb.core.predicate="u ∈ users"/>
+<org.eventb.core.guard name="_aTiCsqGdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd2;" org.eventb.core.predicate="q ∈ quizzes"/>
+<org.eventb.core.guard name="_aTiCs6GdEeq37tKtcCLtXw" org.eventb.core.generated="false" org.eventb.core.label="grd3;" org.eventb.core.predicate="u ∉ reg_users"/>
+<org.eventb.core.action name="_aTipwKGdEeq37tKtcCLtXw" org.eventb.core.assignment="participants ≔ participants ⋃ (q,u)" org.eventb.core.generated="false" org.eventb.core.label="act1;"/>
+</org.eventb.core.event>
+</org.eventb.core.machineFile>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="3">
+<org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.poStamp="3">
+<org.eventb.core.poIdentifier name="ANSWERS" org.eventb.core.type="ℙ(ANSWERS)"/>
+<org.eventb.core.poIdentifier name="OPTIONS" org.eventb.core.type="ℙ(OPTIONS)"/>
+<org.eventb.core.poIdentifier name="QUESITIONS" org.eventb.core.type="ℙ(QUESITIONS)"/>
+<org.eventb.core.poIdentifier name="QUIZZES" org.eventb.core.type="ℙ(QUIZZES)"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/QuizSystem/c2.bpo|org.eventb.core.poFile#c2|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="3"/>
+</org.eventb.core.poFile>
